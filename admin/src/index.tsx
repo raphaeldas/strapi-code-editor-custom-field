@@ -26,6 +26,48 @@ export default {
         Input: async () => import(/* webpackChunkName: "input-component" */ './components/CodeEditor/CodeEditor'),
       },
       options: {
+        base: [
+          {
+            sectionTitle: {
+              id: 'code-editor-text.sectionBase.title',
+              defaultMessage: 'Basic options',
+            },
+            items: [
+              {
+                intlLabel: {
+                  id: 'code-editor-text.sectionBase.theme',
+                  defaultMessage: 'Theme',
+                },
+                name: 'options.theme',
+                type: 'select',
+                value: 'system',
+                options: [
+                  {
+                    key: 'system',
+                    value: 'system',
+                    metadatas: {
+                      intlLabel: { id: 'code-editor-text.sectionBase.theme.system', defaultMessage: 'System' },
+                    },
+                  },
+                  {
+                    key: 'light',
+                    value: 'light',
+                    metadatas: {
+                      intlLabel: { id: 'code-editor-text.sectionBase.theme.light', defaultMessage: 'Light' },
+                    },
+                  },
+                  {
+                    key: 'dark',
+                    value: 'dark',
+                    metadatas: {
+                      intlLabel: { id: 'code-editor-text.sectionBase.theme.dark', defaultMessage: 'Dark' },
+                    },
+                  },
+                ],
+              },
+            ]
+          }
+        ],
         advanced: [
           {
             intlLabel: {
@@ -237,6 +279,38 @@ export default {
                     value: 'yaml',
                     metadatas: {
                       intlLabel: { id: 'code-editor-text.sectionBase.languageValue.yaml', defaultMessage: 'yaml' },
+                    },
+                  },
+                ],
+              },
+              {
+                intlLabel: {
+                  id: 'code-editor-text.sectionBase.theme',
+                  defaultMessage: 'Theme',
+                },
+                name: 'options.theme',
+                type: 'select',
+                value: 'system',
+                options: [
+                  {
+                    key: 'system',
+                    value: 'system',
+                    metadatas: {
+                      intlLabel: { id: 'code-editor-text.sectionBase.theme.system', defaultMessage: 'System' },
+                    },
+                  },
+                  {
+                    key: 'light',
+                    value: 'light',
+                    metadatas: {
+                      intlLabel: { id: 'code-editor-text.sectionBase.theme.light', defaultMessage: 'Light' },
+                    },
+                  },
+                  {
+                    key: 'dark',
+                    value: 'dark',
+                    metadatas: {
+                      intlLabel: { id: 'code-editor-text.sectionBase.theme.dark', defaultMessage: 'Dark' },
                     },
                   },
                 ],

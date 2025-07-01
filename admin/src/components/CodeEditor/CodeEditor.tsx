@@ -59,6 +59,7 @@ type CodeEditorPropsT = {
   attribute: {
     customField: string
     options?: {
+      theme?: string,
       language?: string
       defaultValue?: string
     }
