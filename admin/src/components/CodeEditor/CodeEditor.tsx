@@ -160,6 +160,9 @@ const CodeEditor = ({
   console.log(minimap);
 
   const options = {
+    padding: {
+      top: 5
+    },
     minimap
   }
 
