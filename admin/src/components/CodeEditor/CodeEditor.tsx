@@ -160,9 +160,12 @@ const CodeEditor = React.forwardRef((props: CodeEditorPropsT, ref) => {
   }
 
   const options = {
+    // https://microsoft.github.io/monaco-editor/docs.html#interfaces/editor.IStandaloneEditorConstructionOptions.html
     padding: {
       top: 5
     },
+    scrollBeyondLastColumn: 2,
+    scrollBeyondLastLine: false,
     minimap,
     readOnly: disabled
   }
