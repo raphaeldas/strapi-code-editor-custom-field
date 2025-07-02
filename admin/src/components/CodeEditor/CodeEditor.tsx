@@ -147,7 +147,6 @@ const CodeEditor = React.forwardRef((props: CodeEditorPropsT, ref) => {
   let minimap: IMiniMapOption = { enabled: false };
   switch (minimapFromOptions) {
     case 'on':
-      // @ts-ignore
       minimap.enabled = true;
       break;
 
