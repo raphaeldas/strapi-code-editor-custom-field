@@ -118,8 +118,24 @@ const CodeEditor = ({
     setEditorValue(value ? value.replace(languageRegExp, '') : '')
   }
 
-  // @ts-ignore
-  const theme = localStorage.getItem('STRAPI_THEME')
+  const themeFromOptions = attribute?.options?.theme;
+  // console.log(themeFromOptions);
+  let theme = 'vs-dark';
+  switch (themeFromOptions) {
+    case 'system':
+      // @ts-ignore
+      theme = localStorage.getItem('STRAPI_THEME') || theme;
+      break;
+
+    case 'light':
+      theme = 'light';
+      break;
+
+    default:
+      break;
+  }
+
+  console.log(theme);
 
   const handleOnChange = (value: string) => {
     onChange({ target: { name, value } })
@@ -177,7 +193,7 @@ const CodeEditor = ({
               language={language}
               loading={<Loader>Loading</Loader>}
               onChange={handleChange}
-              theme={theme === 'dark' ?  : 'light'}
+              theme={theme}
               value={editorValue}
             />
           </Suspense>
