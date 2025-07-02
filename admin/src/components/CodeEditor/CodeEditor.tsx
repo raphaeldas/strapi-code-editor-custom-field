@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { debounceTime, Subject } from 'rxjs'
+import { debounceTime, min, Subject } from 'rxjs'
 import styled from 'styled-components'
 import CodeEditorLib from '@monaco-editor/react'
 
@@ -55,11 +55,17 @@ interface MessageDescriptor {
   defaultMessage?: string | MessageFormatElement[]
 }
 
+interface IMiniMapOption {
+  enabled: boolean
+  autohide?: boolean
+}
+
 type CodeEditorPropsT = {
   attribute: {
     customField: string
     options?: {
       theme?: string,
+      minimap?: string,
       language?: string
       defaultValue?: string
     }
@@ -119,7 +125,6 @@ const CodeEditor = ({
   }
 
   const themeFromOptions = attribute?.options?.theme;
-  // console.log(themeFromOptions);
   let theme = 'vs-dark';
   switch (themeFromOptions) {
     case 'system':
@@ -135,7 +140,28 @@ const CodeEditor = ({
       break;
   }
 
-  console.log(theme);
+  const minimapFromOptions = attribute?.options?.minimap;
+  let minimap: IMiniMapOption = { enabled: false };
+  switch (minimapFromOptions) {
+    case 'on':
+      // @ts-ignore
+      minimap.enabled = true;
+      break;
+
+    case 'autoHide':
+      minimap.enabled = true;
+      minimap.autohide = true;
+      break;
+
+    default:
+      break;
+  }
+
+  console.log(minimap);
+
+  const options = {
+    minimap
+  }
 
   const handleOnChange = (value: string) => {
     onChange({ target: { name, value } })
@@ -195,6 +221,7 @@ const CodeEditor = ({
               onChange={handleChange}
               theme={theme}
               value={editorValue}
+              options={options}
             />
           </Suspense>
           <FieldHint />
