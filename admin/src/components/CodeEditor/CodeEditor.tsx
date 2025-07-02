@@ -164,7 +164,8 @@ const CodeEditor = React.forwardRef((props: CodeEditorPropsT, ref) => {
     padding: {
       top: 5
     },
-    minimap
+    minimap,
+    readOnly: disabled
   }
 
   const handleOnChange = (value: string) => {
