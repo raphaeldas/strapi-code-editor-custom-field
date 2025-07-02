@@ -70,6 +70,7 @@ type CodeEditorPropsT = {
       defaultValue?: string
     }
   }
+  disabled?: boolean
   description: MessageDescriptor
   error?: string
   intlLabel: MessageDescriptor
@@ -82,18 +83,20 @@ type CodeEditorPropsT = {
 
 initWorkers()
 
-const CodeEditor = ({
-  attribute,
-  description,
-  // disabled, - todo readonly
-  error,
-  intlLabel,
-  labelAction,
-  name,
-  onChange,
-  required,
-  value,
-}: CodeEditorPropsT) => {
+const CodeEditor = React.forwardRef((props: CodeEditorPropsT, ref) => {
+  const {
+    attribute,
+    description,
+    disabled,
+    error,
+    intlLabel,
+    labelAction,
+    name,
+    onChange,
+    required,
+    value
+  } = props;
+
   const { formatMessage } = useIntl()
   const languageRegExp = new RegExp('__(.+)__;')
   const isJson = attribute.customField.endsWith('code-editor-json')
@@ -156,8 +159,6 @@ const CodeEditor = ({
     default:
       break;
   }
-
-  console.log(minimap);
 
   const options = {
     padding: {
@@ -233,6 +234,6 @@ const CodeEditor = ({
       </StyledDiv>
     </Field>
   )
-}
+})
 
 export default CodeEditor
