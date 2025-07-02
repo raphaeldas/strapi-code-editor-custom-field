@@ -40,7 +40,7 @@ export default {
                 },
                 name: 'options.theme',
                 type: 'select',
-                value: 'system',
+                defaultValue: 'system',
                 options: [
                   {
                     key: 'system',
@@ -72,7 +72,7 @@ export default {
                 },
                 name: 'options.minimap',
                 type: 'select',
-                value: 'off',
+                defaultValue: 'off',
                 options: [
                   {
                     key: 'off',
@@ -322,7 +322,7 @@ export default {
                 },
                 name: 'options.theme',
                 type: 'select',
-                value: 'system',
+                defaultValue: 'system',
                 options: [
                   {
                     key: 'system',
@@ -354,7 +354,7 @@ export default {
                 },
                 name: 'options.minimap',
                 type: 'select',
-                value: 'off',
+                defaultValue: 'off',
                 options: [
                   {
                     key: 'off',
