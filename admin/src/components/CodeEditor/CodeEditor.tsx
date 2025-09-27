@@ -191,11 +191,19 @@ const CodeEditor = React.forwardRef((props: CodeEditorPropsT, ref) => {
     subject.next(isJson || languageFromOptions ? valueToSet : `__${language}__;${valueToSet}`)
   }
 
+  const keyDownHandler = (event: React.KeyboardEvent) => {
+    if (event.key === 's' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault()
+      const saveButton = document.querySelector('button[type="submit"]') as HTMLButtonElement;
+      if (saveButton) saveButton.click();
+    }
+  }
+
   const StyledDiv = fullScreen ? FullScreenDiv : NormalDiv
   return (
     <Field name={name} id={name} error={error} hint={description && formatMessage(description)} required={required}>
       <StyledDiv>
-        <Stack spacing={3}>
+        <Stack spacing={3} onKeyDown={keyDownHandler}>
           <Flex>
             <Flex width="30%" justifyContent="flex-start">
               <FieldLabel action={labelAction}>{formatMessage(intlLabel)}</FieldLabel>
