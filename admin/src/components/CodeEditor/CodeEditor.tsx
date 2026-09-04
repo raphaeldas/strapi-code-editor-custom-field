@@ -191,6 +191,32 @@ const CodeEditor = React.forwardRef((props: CodeEditorPropsT, ref) => {
     subject.next(isJson || languageFromOptions ? valueToSet : `__${language}__;${valueToSet}`)
   }
 
+  const handleEditorDidMount = (editor: any, monaco: any) => {
+    console.log('editorDidMount', editor);
+    console.log('monaco instance', monaco.editor.getModels());
+
+    
+
+    // extra libraries
+    var libSource = 'interface Event { \
+    agenda: string,  \
+    qr_code: string,  \
+    } \
+    declare var event: Event;';
+    var libUri = "ts:filename/facts.d.ts";
+
+    try {
+      monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, libUri);
+      // When resolving definitions and references, the editor will try to use created models.
+      // Creating a model for the library allows "peek definition/references" commands to work with the library.
+      monaco.editor.createModel(libSource, "html", monaco.Uri.parse(libUri));
+      
+    } catch (error) {
+      console.error('Error adding extra library:', error);
+    }
+
+  }
+
   const keyDownHandler = (event: React.KeyboardEvent) => {
     if (event.key === 's' && (event.ctrlKey || event.metaKey)) {
       event.preventDefault()
@@ -237,6 +263,7 @@ const CodeEditor = React.forwardRef((props: CodeEditorPropsT, ref) => {
               theme={theme}
               value={editorValue}
               options={options}
+              onMount={handleEditorDidMount}
             />
           </Suspense>
           <FieldHint />
